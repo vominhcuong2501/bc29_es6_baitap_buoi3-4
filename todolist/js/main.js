@@ -53,7 +53,9 @@ window.xoaToDo = (ele) => {
             setLocalStorage();
         }
     }
+    location.reload();
 }
+
 window.xoaCompleted = (ele) => {
     for(let i = 0; i < completed.length; i++) {
         if(ele === completed[i]) {
@@ -62,60 +64,62 @@ window.xoaCompleted = (ele) => {
             setLocalStorage();
         }
     }
+    location.reload();
 }
 
 // nhấn dấu check chuyển todo sang completed
 window.remove = (ele) => {
     for(let i = 0; i < todo.length; i++) {
         if(ele === todo[i]) {
+            completed.push(ele);
+            renderComplete(completed);
             todo.splice(i, 1);
             renderToDo(todo);
             setLocalStorage();
         }
-    }
-            completed.push(ele)
-            renderComplete(completed);
-            setLocalStorage()
+    }    
+    location.reload();
 }
-
-
-// sắp xếp từ a -> z
-const az = (value) => {
-    value.sort((a, b) => {
-        return a - b;
-    }) 
-    renderToDo(value);
-    renderComplete(value);
-}
-
-// sắp xếp từ z -> a
-const za = (value) => {
-    value.sort((a, b) => {
-        return b - a;
-    }) 
-    renderToDo(value);
-    renderComplete(value);
-}
-
 
 getEle("two").onclick = () => {
-    az(todo); 
-    az(completed);   
+    todo.sort((a, b) => {
+        if(a > b) {
+            return 1;
+        }
+        return -1;
+    });  
+    renderToDo(todo);
+
+    completed.sort((a, b) => {
+        if(a > b) {
+            return 1;
+        }
+        return -1;
+    }); 
+    renderComplete(completed); 
+    setLocalStorage();
 }
+
 
 getEle("three").onclick = () => {
-    za(todo); 
-    za(completed);  
+    // sắp xếp từ z -> a
+    todo.sort((a, b) => {
+        if(b > a) {
+            return 1;
+        }
+        return -1;
+    });  
+    renderToDo(todo);
+
+    completed.sort((a, b) => {
+        if(b > a) {
+            return 1;
+        }
+        return -1;
+    }); 
+    renderComplete(completed); 
+    setLocalStorage();
 }
-
-
-
-
-
-
-
-
-
 
 // lưu ở local
 const setLocalStorage = () => {
