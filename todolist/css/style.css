@@ -205,8 +205,8 @@ span.toggle-btn:hover{
   position: absolute;
   top:0;
   right: 0;
-  /* width: 40px;
-  height: 40px; */
+  width: 40px;
+  height: 40px;
   box-shadow: 0 0 0 2px rgba(222, 57, 99);
   cursor: pointer;
   outline: none;
